@@ -26,17 +26,13 @@ CoverBackground {
       id: py
       Component.onCompleted: {
           addImportPath(Qt.resolvedUrl("."));
-          importModule("metrics", function() {
-            py.setHandler("stat", function(resp) {
-              res = resp[0]
-              console.log(res);
-              batPer.text = "Capacity: " + res["POWER_SUPPLY_CAPACITY"] + "%"
-              batStt.text = "Status: " + res["POWER_SUPPLY_STATUS"] + "%"
-            });
-            py.setHandler("current_now", function(resp) {
-              res = resp[0]
-              batMah.text = "Amount: " + res + "mAh"
-            });
+          importModule("metrics", function() {});
+          py.setHandler("stat", function(res) {
+            batPer.text = "Capacity: " + res["POWER_SUPPLY_CAPACITY"] + "%"
+            batStt.text = "Status: " + res["POWER_SUPPLY_STATUS"]
+          });
+          py.setHandler("current_now", function(res) {
+            batMah.text = "Amount: " + res + "mAh"
           });
       }
     }
